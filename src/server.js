@@ -1,21 +1,27 @@
 import express from "express";
+import bodyParser from "body-parser";
+
 import Data from "../data/data.js";
 import config from "./config.js";
 import mongoose from "mongoose";
 import userRoute from "./routes/userRoute.js";
 
-// const mongodbUrl = config.MONGODB_URL;
-// mongoose
-//   .connect(mongodbUrl, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//     useCreateIndex: true,
-//   },
-//   console.log("CONECTADO!!!"))
-//   .catch((error) => console.log(error.reason));
+const mongodbUrl = config.MONGODB_URL;
+mongoose
+  .connect(
+    mongodbUrl,
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+    },
+    console.log("CONECTADO!!!")
+  )
+  .catch((error) => console.log(error));
 
 const app = express();
-
+//middleware
+app.use(bodyParser.json());
 app.use("/api/users", userRoute);
 
 app.get("/", (req, res) => {
