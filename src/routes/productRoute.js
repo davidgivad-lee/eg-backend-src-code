@@ -73,26 +73,33 @@ router.get("/:id", (req, res) => {
 //   }
 // });
 
-// router.put('/:id', isAuth, isAdmin, async (req, res) => {
-//   const productId = req.params.id;
-//   const product = await Product.findById(productId);
-//   if (product) {
-//     product.name = req.body.name;
-//     product.price = req.body.price;
-//     product.image = req.body.image;
-//     product.brand = req.body.brand;
-//     product.category = req.body.category;
-//     product.countInStock = req.body.countInStock;
-//     product.description = req.body.description;
-//     const updatedProduct = await product.save();
-//     if (updatedProduct) {
-//       return res
-//         .status(200)
-//         .send({ message: 'Product Updated', data: updatedProduct });
-//     }
-//   }
-//   return res.status(500).send({ message: ' Error in Updating Product.' });
-// });
+router.put("/:id", isAuth, isAdmin, async (req, res) => {
+  const productId = req.params.id;
+  const product = await Product.findById(productId);
+  if (product) {
+    product.name = req.body.name;
+    product.nameDetail = req.body.nameDetail;
+    product.description = req.body.description;
+    product.price = req.body.price;
+    product.wholePrice = req.body.wholePrice;
+    product.rating = req.body.rating;
+    product.colors = req.body.colors;
+    product.category = req.body.category;
+    product.length = req.body.length;
+    product.width = req.body.width;
+    product.height = req.body.height;
+    product.photos = req.body.photos;
+    product.countInStock = req.body.countInStock;
+    product.numReviews = req.body.numReviews;
+    const updatedProduct = await product.save();
+    if (updatedProduct) {
+      return res
+        .status(200)
+        .send({ message: "Producto Actualizado", data: updatedProduct });
+    }
+  }
+  return res.status(500).send({ message: " Error en actualizar producto." });
+});
 
 router.delete("/:id", isAuth, isAdmin, async (req, res) => {
   const deletedProduct = await Product.findById(req.params.id);
