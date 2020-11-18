@@ -35,9 +35,16 @@ app.use("/uploads", express.static(path.join(__dirname, "/../uploads")));
 app.use(function (err, req, res, next) {
   if (err instanceof multer.MulterError) {
     console.log(err.field);
-    res.status(401).send({
-      error: "Tipo de archivo inválido. Deber ser de tipo PNG,JPG,JPEG",
-    });
+    console.log(err);
+    if (err.code === "LIMIT_FILE_SIZE") {
+      res.status(401).send({
+        error: "Tamaño de archivo excedido. El tamaño máximo es 1MB.",
+      });
+    } else {
+      res.status(401).send({
+        error: "Tipo de archivo inválido. Deber ser de tipo PNG,JPG,JPEG",
+      });
+    }
   } else next();
 });
 

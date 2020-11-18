@@ -22,7 +22,7 @@ const prodctSchema = new mongoose.Schema({
   length: { type: String, required: false },
   width: { type: String, required: false },
   height: { type: String, required: false },
-  photos: { type: String, required: true },
+  photos: { type: [String], required: true },
   numReviews: { type: Number, default: 0, required: false },
   // reviews: [reviewSchema],
 });
