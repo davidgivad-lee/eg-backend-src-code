@@ -27,22 +27,8 @@ router.get("/", async (req, res) => {
   res.send(products);
 });
 
-// router.get("/", (req, res) => {
-//   res.send(Data.products);
-// });
-
-// router.get('/:id', async (req, res) => {
-//   const product = await Product.findOne({ _id: req.params.id });
-//   if (product) {
-//     res.send(product);
-//   } else {
-//     res.status(404).send({ message: 'Product Not Found.' });
-//   }
-// });
-
-router.get("/:id", (req, res) => {
-  const productId = req.params.id;
-  const product = Data.products.find((x) => x.id === productId);
+router.get("/:id", async (req, res) => {
+  const product = await Product.findOne({ _id: req.params.id });
   if (product) {
     res.send(product);
   } else {

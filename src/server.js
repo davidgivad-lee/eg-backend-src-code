@@ -30,8 +30,7 @@ app.use("/api/uploads", uploadRoute);
 app.use(bodyParser.json());
 app.use("/api/users", userRoute);
 app.use("/api/products", productRoute);
-
-app.use("/uploads", express.static(path.join(__dirname, "/../uploads")));
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(function (err, req, res, next) {
   if (err instanceof multer.MulterError) {
     console.log(err.field);
