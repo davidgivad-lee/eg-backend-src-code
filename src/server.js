@@ -8,6 +8,7 @@ import mongoose from "mongoose";
 import userRoute from "./routes/userRoute.js";
 import uploadRoute from "./routes/uploadRoute.js";
 import productRoute from "./routes/productRoute.js";
+import orderRoute from "./routes/orderRoute.js";
 
 const __dirname = path.resolve();
 
@@ -30,6 +31,7 @@ app.use("/api/uploads", uploadRoute);
 app.use(bodyParser.json());
 app.use("/api/users", userRoute);
 app.use("/api/products", productRoute);
+app.use("/api/orders", orderRoute);
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(function (err, req, res, next) {
   if (err instanceof multer.MulterError) {
